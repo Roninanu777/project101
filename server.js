@@ -20,7 +20,8 @@ let interval;
 const getApiAndEmit = async (socket) => {
     try {
         const res = await axios.get(
-            "https://api.openweathermap.org/data/2.5/weather?lat=20.59&lon=78.96&appid=d7255922b0c131013aaaefca0233ff13"
+            "https://api.openweathermap.org/data/2.5/weather?lat=20.59&lon=78.96&appid=" +
+                process.env.API_KEY
         );
         socket.emit("FromApi", res.data.main.temp);
     } catch (error) {
