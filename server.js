@@ -5,7 +5,14 @@ const path = require("path");
 const PORT = process.env.PORT || 4000;
 
 io.on("connection", (socket) => {
-    console.log("Socket connected...");
+    socket.on("subscribeToTimer", (interval) => {
+        console.log(
+            `Client is subscribing to timer with interval ${interval} with id ${socket.id}`
+        );
+        setInterval(() => {
+            socket.emit("timer", new Date());
+        }, interval);
+    });
 });
 
 io.listen(PORT);
